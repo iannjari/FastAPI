@@ -21,16 +21,7 @@ def about():
     return {'Data':'Testing About'}
 
 inventory= {
-    1: {
-        "name":"milk",
-        "price":3,
-        "brand": "KCC"
-        },
-    2: {
-        "name":"soda",
-        "price":8,
-        "brand": "Cocacola"
-        }
+    
 }
 
 @app.get("/get-item/{item_id}")
@@ -41,7 +32,7 @@ def get_item(item_id:int = Path(None,description='The ID of the item you would l
 @app.get("/get-by-name")
 def get_item_by_name(name:str =Query(None,title='Name',description='Item name')):
     for item_id in inventory:
-        if inventory[item_id]['name'] == name:
+        if inventory[item_id].name == name:
             return inventory[item_id]
     return {'Data Not Found'}
 
@@ -49,5 +40,5 @@ def get_item_by_name(name:str =Query(None,title='Name',description='Item name'))
 def create_item(item_id:int,item:Item):
     if item_id in inventory:
         return {'Error':'Item ID already exists'}
-    inventory[item_id]= {'name':item.name,'price':item.price,'brand':item.brand}
+    inventory[item_id]= item
     return inventory[item_id]
