@@ -24,7 +24,7 @@ inventory= {
 }
 
 @app.get("/get-item/{item_id}")
-def get_item(item_id:int = Path(None,description='The ID of the item you would like to view')):
+def get_item(item_id:int = Path(None,description='The ID of the item you would like to view',gt=0,lt=2)):
     return inventory[item_id]
 
 
